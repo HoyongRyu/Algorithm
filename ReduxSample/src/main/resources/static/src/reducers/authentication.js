@@ -16,7 +16,8 @@ const ERROR_MESSAGE = 'authentication/ERROR_MESSAGE';
 
 const initialState = {
   isAuthenticated: false,
-  username: null,
+  loginId: null,
+  usrId: null,
   errorMessage: null,
   loading: true
 };
@@ -29,21 +30,24 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: action.result.data.authenticated,
-        username: action.result.data.userName,
+        loginId: action.result.data.loginId,
+        usrId: action.result.data.usrId,
         errorMessage: null
       };
     case LOGIN_FAIL:
       return {
         ...state,
         isAuthenticated: false,
-        username: null,
+        loginId: null,
+        usrId: null,
         errorMessage: action.error.data.messageKey
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
-        username: null
+        loginId: null,
+        usrId: null
       };
     case GET_SESSION:
       return {
@@ -54,7 +58,8 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: action.result.data.authenticated || false,
-        username: action.result.data.userName,
+        loginId: action.result.data.loginId,
+        usrId: action.result.data.usrId,
         errorMessage: null,
         loading: false
       };
@@ -62,7 +67,8 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: false,
-        username: null,
+        loginId: null,
+        usrId: null,
         debugError: action.error,
         loading: false
       };
@@ -82,10 +88,10 @@ export function displayAuthError(message) {
   return {type: ERROR_MESSAGE, message};
 }
 
-export function login(username, password) {
+export function login(loginId, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/api/user/session', {username, password}),
+    promise: (client) => client.post('/api/user/session', {loginId, password}),
     afterSuccess: (dispatch, getState, response) => {
       localStorage.setItem('auth-token', response.headers['x-auth-token']);
       const routingState = getState().routing.locationBeforeTransitions.state || {};

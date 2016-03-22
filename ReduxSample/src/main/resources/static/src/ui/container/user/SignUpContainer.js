@@ -9,8 +9,6 @@ export default connect(
 
 const mapStateToProps = (state) => (
   {
-  	sessionTokenId: state.userReducer.signUpReducer.sessionTokenId,
-  	sessionFailCode: state.userReducer.signUpReducer.sessionFailCode,
-  	modalShow: state.userReducer.signUpReducer.modalShow
+  	
   }
 )
