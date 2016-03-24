@@ -1,18 +1,18 @@
 package rhy.sample.common.util;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DateUtil {
 
-    public static DateTime getCurrentDateTime(){
-        return new DateTime();
+    public static Date getCurrentDateTime(){
+        return new Date();
     }
 
     public static String getCurrentDateTimeString(String format) {
-        DateTimeFormatter formatter = DateTimeFormat.forPattern(format);
-        return formatter.print(new DateTime());
+        DateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(new Date());
     }
     
     public static String getCurrentDateTimeString() {

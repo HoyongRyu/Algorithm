@@ -1,12 +1,10 @@
 package rhy.sample.common.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 
 @MappedSuperclass
 public abstract class RHYBaseEntity implements Serializable{
@@ -14,24 +12,22 @@ public abstract class RHYBaseEntity implements Serializable{
     private static final long serialVersionUID = 4809702013448363119L;
 
     @NotNull
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime crtDt;
+    private Date crtDt;
     
     @NotNull
     private String crtrId;
     
     @NotNull
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime mdfyDt;
+    private Date mdfyDt;
     
     @NotNull
     private String mdfrId;
     
-    public DateTime getCrtDt() {
+    public Date getCrtDt() {
         return crtDt;
     }
 
-    public void setCrtDt(DateTime crtDt) {
+    public void setCrtDt(Date crtDt) {
         this.crtDt = crtDt;
     }
 
@@ -43,11 +39,11 @@ public abstract class RHYBaseEntity implements Serializable{
         this.crtrId = crtrId;
     }
 
-    public DateTime getMdfyDt() {
+    public Date getMdfyDt() {
         return mdfyDt;
     }
 
-    public void setMdfyDt(DateTime mdfyDt) {
+    public void setMdfyDt(Date mdfyDt) {
         this.mdfyDt = mdfyDt;
     }
 
