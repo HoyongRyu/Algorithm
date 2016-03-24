@@ -12,6 +12,8 @@ export default () => (
   <Route path="/" name="index" component={Index}>
     <IndexRoute component={SignIn}/>
     <Route path="/signup" name="signup" component={SignUp}/>
-  	<Route path="/admin" name="app" component={App}/>
+  	<Route path="/admin" name="app" component={App}>
+      <Route path="/member" name="member" component={MemberList} />
+    </Route>
   </Route>
 );

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const Header = (props) => {
   return (
-    <div className="navbar navbar-default navbar-static-top">
+    <div className="navbar navbar-default navbar-static-top navbar-inverse">
       <div className="container">
         <div className="navbar-header">
           <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">

@@ -1,13 +1,13 @@
+import { browserHistory } from 'react-router';
+import { POPUP_CLOSE } from 'reducers/commonType';
+
 const SIGN_UP_REQUEST = 'signUp/REQUEST';
 const SIGN_UP_SUCCESS = 'signUp/SUCCESS';
 const SIGN_UP_FAIL = 'signUp/FAIL';
 
-const SIGN_UP_MODAL_CLOSE = 'signUp/MODAL_CLOSE'
-
 const initialState = {
-  sessionTokenId: '',
-  sessionFailCode: '',
-  modalShow: true
+  usrId: '',
+  errorMessage: ''
 };
 
 // Reducer
@@ -15,21 +15,20 @@ const initialState = {
 export default function signUpReducer(state = initialState, action) {
   switch (action.type) {
     case SIGN_UP_SUCCESS:
-      router.transitionTo('/');
       return {
         ...state,
-        sessionTokenId: action.result.data.usrId
+        usrId: action.result.data.usrId
       };
     case SIGN_UP_FAIL:
       return {
-        ...state
-        // failCode: action.result.
+        ...state,
+        errorMessage: '회원가입 실패. 관리자에게 문의하세요.'
       };
-    case SIGN_UP_MODAL_CLOSE:
+    case POPUP_CLOSE:
       return {
         ...state,
-        modalShow: false
-      };  
+        errorMessage: ''
+      }
     default:
       return state;
   }
@@ -37,15 +36,30 @@ export default function signUpReducer(state = initialState, action) {
 
 // Actions
 
-export function signUp() {
+export const signUp = (loginId, password) => {
   return  {
     types: [SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL],
-    promise: client => client.post('/api/createUser')
+    promise: client => client.post('/api/user/createUser', {loginId, password}),
+    afterSuccess: (dispatch, getState, response) => {
+      if (getState().userReducer.signUpReducer.usrId > ''){
+        browserHistory.push('/');
+      }
+    }
   };
 }
 
-export function modalClose() {
+export const closeErrorPopup = () => {
   return {
-    types: SIGN_UP_MODAL_CLOSE
+    type: POPUP_CLOSE
   }
 }
+
+// export function signUp(loginId, password) {
+//   return  {
+//     types: [SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL],
+//     promise: client => client.post('/api/user/createUser', {loginId, password}),
+//     afterSuccess: (dispatch, getState, response) => {
+//       browserHistory.push('/');
+//     }
+//   };
+// }

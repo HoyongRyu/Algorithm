@@ -39,6 +39,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.apache.httpcomponents:httpclient:4.5.2')
+	compile('com.google.code.gson:gson:2.3.1')
+	compile('joda-time:joda-time:2.9.2')
+	compile('org.jadira.usertype:usertype.core:5.0.0.GA')
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test') 
 }

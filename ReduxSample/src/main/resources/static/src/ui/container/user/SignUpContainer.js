@@ -1,14 +1,15 @@
 import {connect} from 'react-redux';
-import {signUp, modalClose} from 'reducers/user/signUpReducer';
+import {signUp, closeErrorPopup} from 'reducers/user/signUpReducer';
 import SignUpComponent from 'ui/component/user/SignUpComponent';
 
 export default connect(
-  mapStateToProps,
-  {signUp, modalClose}
+  state => ({errorMessage: state.userReducer.signUpReducer.errorMessage}),
+  { signUp, closeErrorPopup }
 )(SignUpComponent);
 
-const mapStateToProps = (state) => (
+const mapStateToProps = (state) => {
+  return 
   {
-  	
+  	errorMessage: state.userReducer.signUpReducer.errorMessage
   }
-)
+}

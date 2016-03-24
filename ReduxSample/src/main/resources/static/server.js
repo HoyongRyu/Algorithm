@@ -24,6 +24,10 @@ app.use('/api', (req, res) => {
     .pipe(res);
 });
 
+app.use('*', (req, res) => {
+  req.pipe(request('http://localhost:3000/index.html')).pipe(res);
+});
+
 app.listen(port, function(error) {
   if (error) {
     console.error(error);

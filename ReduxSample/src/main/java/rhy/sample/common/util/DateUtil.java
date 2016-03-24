@@ -1,18 +1,18 @@
 package rhy.sample.common.util;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class DateUtil {
 
-    public static Date getCurrentDateTime(){
-        return new Date();
+    public static DateTime getCurrentDateTime(){
+        return new DateTime();
     }
 
     public static String getCurrentDateTimeString(String format) {
-        DateFormat dateFormat = new SimpleDateFormat(format);
-        return dateFormat.format(new Date());
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(format);
+        return formatter.print(new DateTime());
     }
     
     public static String getCurrentDateTimeString() {
@@ -28,4 +28,5 @@ public class DateUtil {
         delimeter = delimeter == null ? "" : delimeter;
         return getCurrentDateTimeString("HH" + delimeter + "mm" + delimeter + "ss");
     }
+    
 }

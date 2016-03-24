@@ -10,9 +10,9 @@ export default connect(
 const mapStateToProps = (state) => (
   {
   	isAuthenticated: state.authentication.isAuthenticated,
-	usrId: state.authentication.usrId,
-	errorMessage: state.authentication.errorMessage,
-	loading: state.authentication.loading,
+  	usrId: state.authentication.usrId,
+  	errorMessage: state.authentication.errorMessage,
+  	loading: state.authentication.loading,
   	sessionTokenId: state.authentication.sessionTokenId,
   	sessionFailCode: state.authentication.sessionFailCode
   }

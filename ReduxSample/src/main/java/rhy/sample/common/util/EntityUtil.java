@@ -1,13 +1,13 @@
 package rhy.sample.common.util;
 
-import java.util.Date;
+import org.joda.time.DateTime;
 
 import rhy.sample.common.entity.RHYBaseEntity;
 
 public class EntityUtil {
 
     public static RHYBaseEntity setManagementColumn(RHYBaseEntity entity, String usrId){
-        Date currentDateTime = DateUtil.getCurrentDateTime();
+        DateTime currentDateTime = DateUtil.getCurrentDateTime();
         entity.setCrtDt(currentDateTime);
         entity.setCrtrId(usrId);
         entity.setMdfyDt(currentDateTime);
