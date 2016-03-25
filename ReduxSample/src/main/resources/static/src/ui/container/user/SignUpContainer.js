@@ -3,13 +3,11 @@ import {signUp, closeErrorPopup} from 'reducers/user/signUpReducer';
 import SignUpComponent from 'ui/component/user/SignUpComponent';
 
 export default connect(
-  state => ({errorMessage: state.userReducer.signUpReducer.errorMessage}),
+  state => (
+  	{
+  		message: state.userReducer.signUpReducer.message,
+  		isSuccess: state.userReducer.signUpReducer.isSuccess
+  	}
+  ),
   { signUp, closeErrorPopup }
 )(SignUpComponent);
-
-const mapStateToProps = (state) => {
-  return 
-  {
-  	errorMessage: state.userReducer.signUpReducer.errorMessage
-  }
-}

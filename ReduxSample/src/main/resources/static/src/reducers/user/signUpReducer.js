@@ -6,8 +6,8 @@ const SIGN_UP_SUCCESS = 'signUp/SUCCESS';
 const SIGN_UP_FAIL = 'signUp/FAIL';
 
 const initialState = {
-  usrId: '',
-  errorMessage: ''
+  isSuccess: null,
+  message: ''
 };
 
 // Reducer
@@ -17,17 +17,20 @@ export default function signUpReducer(state = initialState, action) {
     case SIGN_UP_SUCCESS:
       return {
         ...state,
-        usrId: action.result.data.usrId
+        isSuccess: true,
+        message: '관리자 승인 후 로그인 하세요.'
       };
     case SIGN_UP_FAIL:
       return {
         ...state,
-        errorMessage: '회원가입 실패. 관리자에게 문의하세요.'
+        isSuccess: false,
+        message: '회원가입 실패. 관리자에게 문의하세요.'
       };
     case POPUP_CLOSE:
       return {
         ...state,
-        errorMessage: ''
+        isSuccess: null,
+        message: ''
       }
     default:
       return state;

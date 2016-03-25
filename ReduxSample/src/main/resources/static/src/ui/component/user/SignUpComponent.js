@@ -1,19 +1,39 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import { Form, TextInput } from 'react-easy-form';
-import { Modal } from 'react-bootstrap';
+import { Modal, Alert } from 'react-bootstrap';
 
 const ErrorModal = ({message, show, close}) => (
-  <Modal id="error" show={show}>
-    <Modal.Header>
-      <Modal.Title>Error</Modal.Title>
+  <Modal show={show} onHide={close}>
+    <Modal.Header closeButton>
+      <Modal.Title>
+        <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;
+        Error
+      </Modal.Title>
     </Modal.Header>
     <Modal.Body>
-      {message}
-    </Modal.Body>
-    <Modal.Footer>
+      <div className="alert alert-warning" role="warning">
+        {message}
+      </div>
       <button className="btn btn-default" onClick={close}>Close</button>
-    </Modal.Footer>
+    </Modal.Body>
+  </Modal>
+);
+
+const SuccessModal = ({headerMessage, bodyMessage, show, close}) => (
+  <Modal show={show} onHide={close}>
+    <Modal.Header closeButton>
+      <Modal.Title>
+        <span className="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>&nbsp;
+        등록 완료
+      </Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <div className="alert alert-warning" role="warning">
+        {bodyMessage}
+      </div>
+      <button className="btn btn-primary" onClick={close}>Close</button>
+    </Modal.Body>
   </Modal>
 );
 
@@ -21,13 +41,15 @@ export default class SignUpComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isErrorShow: false
+      isErrorShow: false,
+      isSuccesShow: false
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      isErrorShow: nextProps.errorMessage ? true : false
+      isErrorShow: !nextProps.isSuccess,
+      isSuccesShow: nextProps.isSuccess
     });
   }
 
@@ -57,10 +79,11 @@ export default class SignUpComponent extends Component {
                   <button type="submit" className="btn btn-primary">Sign Up For BAS Admin</button>
                 </Form>
               </div>
-            </div>
+            </div>j
           </div>
         </div>
-        <ErrorModal message={this.props.errorMessage} show={this.state.isErrorShow} close={this.props.closeErrorPopup} />
+        <SuccessModal message={this.props.message} show={this.state.isSuccesShow} close={this.props.closeErrorPopup} />
+        <ErrorModal message={this.props.message} show={this.state.isErrorShow} close={this.props.closeErrorPopup} />
       </div>
     );
   }
