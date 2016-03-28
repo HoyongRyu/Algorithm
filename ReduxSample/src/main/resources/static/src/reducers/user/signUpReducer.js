@@ -1,5 +1,5 @@
 import { browserHistory } from 'react-router';
-import { POPUP_CLOSE } from 'reducers/commonType';
+import { POPUP_CLOSE } from 'reducers/commonReducer';
 
 const SIGN_UP_REQUEST = 'signUp/REQUEST';
 const SIGN_UP_SUCCESS = 'signUp/SUCCESS';
@@ -7,7 +7,8 @@ const SIGN_UP_FAIL = 'signUp/FAIL';
 
 const initialState = {
   isSuccess: null,
-  message: ''
+  message: '',
+  redirectURI: null
 };
 
 // Reducer
@@ -30,7 +31,8 @@ export default function signUpReducer(state = initialState, action) {
       return {
         ...state,
         isSuccess: null,
-        message: ''
+        message: '',
+        redirectURI: action.redirectURI
       }
     default:
       return state;
@@ -42,27 +44,8 @@ export default function signUpReducer(state = initialState, action) {
 export const signUp = (loginId, password) => {
   return  {
     types: [SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL],
-    promise: client => client.post('/api/user/createUser', {loginId, password}),
-    afterSuccess: (dispatch, getState, response) => {
-      if (getState().userReducer.signUpReducer.usrId > ''){
-        browserHistory.push('/');
-      }
-    }
+    promise: client => client.post('/api/user/createUser', {loginId, password})
   };
 }
 
-export const closeErrorPopup = () => {
-  return {
-    type: POPUP_CLOSE
-  }
-}
 
-// export function signUp(loginId, password) {
-//   return  {
-//     types: [SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL],
-//     promise: client => client.post('/api/user/createUser', {loginId, password}),
-//     afterSuccess: (dispatch, getState, response) => {
-//       browserHistory.push('/');
-//     }
-//   };
-// }

@@ -41,8 +41,6 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	public User login(User user) throws Exception{
-	    user = userBiz.loginUser(user);
-	    user.setSessionToken("");
-	    return user;
+	    return userBiz.loginUser(user);
 	}
 }

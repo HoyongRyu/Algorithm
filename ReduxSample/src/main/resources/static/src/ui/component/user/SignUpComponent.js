@@ -1,41 +1,8 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import { Form, TextInput } from 'react-easy-form';
-import { Modal, Alert } from 'react-bootstrap';
-
-const ErrorModal = ({message, show, close}) => (
-  <Modal show={show} onHide={close}>
-    <Modal.Header closeButton>
-      <Modal.Title>
-        <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;
-        Error
-      </Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <div className="alert alert-warning" role="warning">
-        {message}
-      </div>
-      <button className="btn btn-default" onClick={close}>Close</button>
-    </Modal.Body>
-  </Modal>
-);
-
-const SuccessModal = ({headerMessage, bodyMessage, show, close}) => (
-  <Modal show={show} onHide={close}>
-    <Modal.Header closeButton>
-      <Modal.Title>
-        <span className="glyphicon glyphicon-ok-circle" aria-hidden="true"></span>&nbsp;
-        등록 완료
-      </Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <div className="alert alert-warning" role="warning">
-        {bodyMessage}
-      </div>
-      <button className="btn btn-primary" onClick={close}>Close</button>
-    </Modal.Body>
-  </Modal>
-);
+import ErrorPopup from 'ui/component/common/ErrorPopupComponent'
+import SuccessPopup from 'ui/component/common/SuccessPopupComponent'
 
 export default class SignUpComponent extends Component {
   constructor(props) {
@@ -48,9 +15,10 @@ export default class SignUpComponent extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      isErrorShow: !nextProps.isSuccess,
-      isSuccesShow: nextProps.isSuccess
+      isErrorShow: nextProps.isSuccess == false && nextProps.message ? true : false,
+      isSuccesShow: nextProps.isSuccess == true && nextProps.message ? true : false
     });
+    this.props.redirect(nextProps.redirectURI);
   }
 
   render() {
@@ -82,8 +50,8 @@ export default class SignUpComponent extends Component {
             </div>j
           </div>
         </div>
-        <SuccessModal message={this.props.message} show={this.state.isSuccesShow} close={this.props.closeErrorPopup} />
-        <ErrorModal message={this.props.message} show={this.state.isErrorShow} close={this.props.closeErrorPopup} />
+        <SuccessPopup message={this.props.message} show={this.state.isSuccesShow} close={this.props.closePopup} />
+        <ErrorPopup message={this.props.message} show={this.state.isErrorShow} close={this.props.closePopup} />
       </div>
     );
   }

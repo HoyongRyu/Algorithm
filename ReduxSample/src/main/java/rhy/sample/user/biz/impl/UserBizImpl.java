@@ -76,12 +76,13 @@ public class UserBizImpl implements UserBiz {
         if (result.containsKey("sessionToken")){
             user.setSessionToken((String)result.get("sessionToken"));
             user.setUsrId((String)result.get("objectId"));
+            user.setLoginId((String)result.get("username"));
         }else {
             //TODO 에러 처리
         }
         
         
-        return null;
+        return user;
     }
     
     

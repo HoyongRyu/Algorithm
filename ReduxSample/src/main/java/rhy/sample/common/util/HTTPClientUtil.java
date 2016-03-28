@@ -32,7 +32,8 @@ public class HTTPClientUtil {
     private static final String DEFAULT_ENCODING = "utf-8";
     private static final String DEFAULT_CONTENT_TYPE = "application/json";
     
-    private static final HttpHost PROXY = new HttpHost("70.10.15.10", 8080, "http");
+//    private static final HttpHost PROXY = new HttpHost("70.10.15.10", 8080, "http");
+    private static final HttpHost PROXY = null;
     
     private static final Logger LOGGER = LoggerFactory.getLogger(HTTPClientUtil.class);
     
