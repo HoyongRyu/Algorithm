@@ -24,6 +24,14 @@
   margin 50px 150px
 </style>
 
+<script type="text/javascript">
+$(document).ready(function () {
+	$('label.tree-toggler').click(function () {
+		$(this).parent().children('ul.tree').toggle(300);
+	});
+});
+</script>
+
 </head> 
 <body> 
     <div id="root"></div>

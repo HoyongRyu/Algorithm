@@ -18,6 +18,9 @@ export default class SignInComponent extends Component {
       isErrorShow: nextProps.showPopup == true && nextProps.isAuthenticated == false ? true : false,
       isSuccesShow: nextProps.showPopup == true && nextProps.isAuthenticated == true ? true : false
     });
+    if (nextProps.redirectURI !== '/'){
+      this.props.redirect(nextProps.redirectURI);
+    }
   }
 
   render() {
