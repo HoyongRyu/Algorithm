@@ -25,6 +25,8 @@ import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import rhy.sample.common.config.RHYConfig;
+
 public class HTTPClientUtil {
     
     private static final int DEFAULT_CONNECT_TIMEOUT = 3;
@@ -32,9 +34,10 @@ public class HTTPClientUtil {
     private static final String DEFAULT_ENCODING = "utf-8";
     private static final String DEFAULT_CONTENT_TYPE = "application/json";
     
-//    private static final HttpHost PROXY = new HttpHost("70.10.15.10", 8080, "http");
-    private static final HttpHost PROXY = null;
-    
+    private static final HttpHost PROXY = StringUtil.isEmpty(RHYConfig.getProxyIP()) ? 
+            null : new HttpHost(RHYConfig.getProxyIP(), RHYConfig.getProxyPort(), "http");
+    // private static final HttpHost PROXY = null;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(HTTPClientUtil.class);
     
     
@@ -109,6 +112,7 @@ public class HTTPClientUtil {
         CloseableHttpResponse response = null;
         CloseableHttpClient httpClient = HttpClients.createDefault();
         RequestConfig config = RequestConfig.custom()
+                .setProxy(PROXY)
                 .setConnectTimeout(connectionTimeoutSec * 1000)
                 .setSocketTimeout(socketTimeoutSec * 1000).build();
         httpGet.setConfig(config);

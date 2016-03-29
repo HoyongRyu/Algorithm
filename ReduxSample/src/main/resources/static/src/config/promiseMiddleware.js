@@ -3,6 +3,10 @@ import axios from 'axios';
 export default function promiseMiddleware({ dispatch, getState }) {
   return next => action => {
 
+    if (!action){
+      return;
+    }
+
     if (typeof action === 'function') {
       return action(dispatch, getState);
     }

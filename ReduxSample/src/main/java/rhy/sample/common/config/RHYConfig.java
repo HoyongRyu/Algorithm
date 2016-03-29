@@ -3,6 +3,21 @@ package rhy.sample.common.config;
 import rhy.sample.common.init.ConfigurationLoader;
 
 public class RHYConfig {
+
+    /**
+     * WEB Proxy IP
+     */
+    public static String getProxyIP(){
+        return ConfigurationLoader.getProperty("proxy.ip");
+    }
+    
+    /**
+     * WEB Proxy Port
+     */
+    public static int getProxyPort(){
+        String port = ConfigurationLoader.getProperty("proxy.port");
+        return port != null ? Integer.parseInt(port) : 0;
+    }
     
     /**
      * T development BaaS 호출 URL

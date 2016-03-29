@@ -18,7 +18,9 @@ export default class SignUpComponent extends Component {
       isErrorShow: nextProps.isSuccess == false && nextProps.message ? true : false,
       isSuccesShow: nextProps.isSuccess == true && nextProps.message ? true : false
     });
-    this.props.redirect(nextProps.redirectURI);
+    if (typeof redirectURI  == "string") {
+      this.props.redirect(nextProps.redirectURI);
+    }
   }
 
   render() {
