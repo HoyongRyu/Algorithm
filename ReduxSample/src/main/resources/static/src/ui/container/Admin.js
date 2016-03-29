@@ -3,27 +3,24 @@ import { Link, Router } from 'react-router';
 import { connect } from 'react-redux';
 
 const Node = (props) => {
-  var subNodes;
+  console.log("props : " + JSON.stringify(props));
+  var component;
   if (props.node.subNodes != null){
-    subNodes = props.node.subNodes.map((node, key) => (
-      <li><label className="tree-toggler nav-header">{node.label}</label>
-        <ul className="nav nav-list tree">
-          <Node node={subNodes} key={key}/>
-        </ul>
-      </li>
+    component = props.node.subNodes.map((node, key) => (
+      <Node node={node} key={key}/>
     ))
   }else {
-    return 
+    return (
       <li key={props.key}>
         <Link to={props.node.link}>{props.node.label}</Link>
       </li>
-    ;
+    );
   }
 
   return (
     <li><label className="tree-toggler nav-header">{props.node.label}</label>
       <ul className="nav nav-list tree">
-        {subNodes}
+        {component}
       </ul>
     </li>
   );
@@ -63,7 +60,7 @@ export class Admin extends Component {
             <div className="well">
               <div>
                   <ul className="nav nav-list">
-                    <Node parentMenus={leftMenuItems} />
+                    <Node node={leftMenuItems} />
                   </ul>
               </div>
           </div>
