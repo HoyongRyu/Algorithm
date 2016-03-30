@@ -1,6 +1,5 @@
 package rhy.sample.user.biz.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import rhy.sample.common.util.JSONUtil;
 import rhy.sample.common.util.TDevBaaSUtil;
 import rhy.sample.user.biz.UserBiz;
 import rhy.sample.user.entity.User;
-import rhy.sample.user.repository.UserRepository;
+import rhy.sample.user.repository.UserMasterRepository;
 
 @Service
 public class UserBizImpl implements UserBiz {
@@ -23,7 +22,7 @@ public class UserBizImpl implements UserBiz {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserBizImpl.class);
     
     @Autowired
-    private UserRepository userRepository;
+    private UserMasterRepository userRepository;
 
     @Override
     public User createUser(User user) throws Exception {
@@ -54,7 +53,7 @@ public class UserBizImpl implements UserBiz {
     @Override
     public User saveUser(User user) {
         EntityUtil.setManagementColumn(user, user.getUsrId());
-        userRepository.save(user);
+        userRepository.insert(user);
         return user;
     }
 

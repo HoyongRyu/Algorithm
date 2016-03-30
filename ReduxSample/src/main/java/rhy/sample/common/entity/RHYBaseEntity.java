@@ -3,24 +3,16 @@ package rhy.sample.common.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
-
-@MappedSuperclass
 public abstract class RHYBaseEntity implements Serializable{
     
     private static final long serialVersionUID = 4809702013448363119L;
 
-    @NotNull
     private Date crtDt;
     
-    @NotNull
     private String crtrId;
     
-    @NotNull
     private Date mdfyDt;
     
-    @NotNull
     private String mdfrId;
     
     public Date getCrtDt() {

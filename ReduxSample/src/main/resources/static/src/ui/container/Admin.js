@@ -38,19 +38,19 @@ export class Admin extends Component {
       subNodes: [
         {label: 'Member',
           subNodes: [
-            {label: 'Buyer Member', link: '/member/buyerList'},
-            {label: 'Admin Member',
+            {label: 'Buyer', link: '/admin/member'},
+            {label: 'Admin',
               subNodes: [
-                {label: 'Admin Member22', link: '/member/adminList'},
-                {label: 'Admin Member33', link: '/member/adminList'}
+                {label: 'Admin1', link: '/admin/member/adminList'},
+                {label: 'Admin2', link: '/admin/member/adminList'}
               ]
             }
           ]
         },
-        {label: 'Content', link: '/content'},
-        {label: 'Display', link: '/display'},
-        {label: 'Order', link: '/order'},
-        {label: 'System', link: '/system'}
+        {label: 'Content', link: '/admin/content'},
+        {label: 'Display', link: '/admin/display'},
+        {label: 'Order', link: '/admin/order'},
+        {label: 'System', link: '/admin/system'}
       ]
     };
 

@@ -14,7 +14,7 @@ export default () => (
     <Route path="/signup" name="signup" component={SignUp}/>
   	<Route path="/admin" name="admin" component={Admin}>
   	  /* index router에 Dashboard 추가 */
-      <Route path="/member" name="member" component={MemberList} />
+      <Route path="/admin/member" name="member" component={MemberList} />
     </Route>
   </Route>
 );
