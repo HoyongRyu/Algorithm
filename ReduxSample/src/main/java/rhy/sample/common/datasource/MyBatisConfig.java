@@ -16,7 +16,7 @@ public abstract class MyBatisConfig {
 
     public static final String BASE_PACKAGE = "rhy.sample";
     public static final String CONFIG_LOCATION_PATH = "classpath:config/mybatis-config.xml";
-    public static final String MAPPER_LOCATIONS_PATH = "**/repository/sql/*.xml";
+    public static final String MAPPER_LOCATIONS_PATH = "classpath:mybatis/**/sql/*.xml";
     
     protected void configureSqlSessionFactory(SqlSessionFactoryBean sessionFactoryBean, DataSource dataSource) throws IOException {
         PathMatchingResourcePatternResolver pathResolver = new PathMatchingResourcePatternResolver();
