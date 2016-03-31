@@ -2,10 +2,8 @@ package rhy.sample.common.datasource;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = SlaveDatabaseProperties.PREFIX)
+@ConfigurationProperties(prefix = "mybatis.slave")
 public class SlaveDatabaseProperties implements DatabaseProperties {
-    
-    public static final String PREFIX = "mybatis.slave";
     
     private String driverClassName;
     
