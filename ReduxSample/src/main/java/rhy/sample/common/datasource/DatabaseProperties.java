@@ -1,46 +1,12 @@
 package rhy.sample.common.datasource;
 
-public abstract class DatabaseProperties {
+public interface DatabaseProperties {
     
-    private String driverClassName;
+    public String getDriverClassName();
     
-    private String url;
+    public String getUrl();
     
-    private String username;
+    public String getUsername();
     
-    private String password;
-
-    public String getDriverClassName() {
-        return driverClassName;
-    }
-
-    public void setDriverClassName(String driverClassName) {
-        this.driverClassName = driverClassName;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String userName) {
-        this.username = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    
+    public String getPassword();
 }

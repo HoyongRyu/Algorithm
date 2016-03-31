@@ -24,7 +24,7 @@ public abstract class DatabaseConfig {
         LOGGER.info("configureDataSource = {}", databaseProperties);
         dataSource.setDriverClassName(databaseProperties.getDriverClassName());
         dataSource.setUrl(databaseProperties.getUrl());
-        dataSource.setUsername(databaseProperties.getUserName());
+        dataSource.setUsername(databaseProperties.getUsername());
         dataSource.setPassword(databaseProperties.getPassword());
         dataSource.setTestOnBorrow(false);
         dataSource.setTestOnReturn(false);
