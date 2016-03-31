@@ -106,8 +106,5 @@ task stopFrontend(type: Exec) {
 
 bootRun {
     addResources = false
-    systemProperty "rhy.home.dir", rhy_home_dir
-    
-    bootRun.setDebug(true)
-
+    systemProperty "rhy.home.dir", rhy_home_dir    
 }
