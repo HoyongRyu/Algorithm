@@ -5,7 +5,6 @@ import Index from 'main/container/Index';
 import Admin from 'main/container/Admin';
 import SignIn from 'member/container/SignInContainer';
 import SignUp from 'member/container/SignUpContainer';
-import MemberList from 'member/container/MemberListContainer';
 
 
 export default () => (
@@ -14,7 +13,7 @@ export default () => (
     <Route path="/signup" name="signup" component={SignUp}/>
     <Route path="/admin" name="admin" component={Admin}>
       /* index router에 Dashboard 추가 */
-      <Route path="/admin/member" name="memberList" component={MemberList} />
+      /*<Route path="/admin/member" name="memberList" component={MemberList} />*/
     </Route>
   </Route>
 );

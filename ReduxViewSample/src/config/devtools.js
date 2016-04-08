@@ -7,7 +7,7 @@ import DiffMonitor from 'redux-devtools-diff-monitor';
 // You can toggle visibility of devTools with ctrl + H
 // and change their position with ctrl + Q
 export default createDevTools(
-  <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" changeMonitorKey='ctrl-m'>
+  <DockMonitor toggleVisibilityKey="ctrl-h" changePositionKey="ctrl-q" changeMonitorKey='ctrl-m' defaultPosition='bottom'>
     <LogMonitor />
     <DiffMonitor />
   </DockMonitor>

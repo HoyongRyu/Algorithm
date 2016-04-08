@@ -25,38 +25,32 @@ export default class SignInComponent extends Component {
 
   render() {
     return (
-      <div>
-        <div className="cover">
-          <div className="cover-image"></div>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-7 text-center">
-                <br/>
-                <br/>
-                <h2><img src={require('img/logobas.jpg')} /></h2>
-                <h1>Welcome to</h1>
-                <p>Administration site</p>
-                <br/>
-                <br/>
-              </div>
-              <div className="col-md-3">
-                <br/><br/><br/>
-                <Form ref="form" className="text-left" onSubmit={(formData) => this.handleSubmit(formData)}>
-                  <div className="form-group" id="loginId">
-                    <label className="control-label">Email address</label>
-                    <TextInput className="form-control" name="loginId" placeholder="Enter email" type="email" required />
-                  </div>
-                  <div className="form-group" id="password">
-                    <label className="control-label">Password</label>
-                    <TextInput className="form-control" name="password" placeholder="Password" type="password" required />
-                  </div>
-                  <button type="submit" className="btn btn-default">Sign In</button>&nbsp;
-                  <Link className="btn btn-primary" to="/signup">Sign Up</Link>
-                </Form>
-                <br/>
-                <br/>
-              </div>
+      <div className="hold-transition">
+        <div className="login-box">
+          <div className="box box-info">
+            <div className="box-header with-border">
+              <h3 className="box-title">Sample Login</h3>
             </div>
+            <Form ref="form" className="form-horizontal" onSubmit={(formData) => this.handleSubmit(formData)}>
+              <div className="box-body">
+                <div className="form-group">
+                  <label htmlFor="loginId" className="col-sm-2 control-label">Email</label>
+                  <div className="col-sm-10">
+                    <TextInput type="email" className="form-control" name="loginId" placeholder="Enter email" required />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password" className="col-sm-2 control-label">Password</label>
+                  <div className="col-sm-10">
+                    <TextInput type="password" className="form-control" name="password" placeholder="Password" required />
+                  </div>
+                </div>
+              </div>
+              <div className="box-footer">
+                <Link to="/signup" className="btn btn-default pull-left">Sign up</Link>
+                <button type="submit" className="btn btn-primary pull-right">Sign in</button>
+              </div>
+            </Form>
           </div>
         </div>
         <SuccessPopup message="로그인 성공" show={this.state.isSuccesShow} close={() => this.props.closePopup('/admin')} />

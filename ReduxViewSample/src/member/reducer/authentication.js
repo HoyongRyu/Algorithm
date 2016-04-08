@@ -1,4 +1,5 @@
 import { browserHistory } from 'react-router';
+import { POPUP_CLOSE } from 'common/reducer/commonReducer';
 
 const LOGIN = 'authentication/LOGIN';
 const LOGIN_SUCCESS = 'authentication/LOGIN_SUCCESS';
@@ -15,10 +16,13 @@ const GET_SESSION_FAIL = 'authentication/GET_SESSION_FAIL';
 const ERROR_MESSAGE = 'authentication/ERROR_MESSAGE';
 
 const initialState = {
-  isAuthenticated: false,
-  username: null,
+  isAuthenticated: null,
+  sessionToken: null,
+  loginId: null,
   errorMessage: null,
-  loading: true
+  loading: true,
+  redirectURI: null,
+  showPopup: null
 };
 
 // Reducer
@@ -28,22 +32,29 @@ export default function reducer(state = initialState, action) {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        isAuthenticated: action.result.data.authenticated,
-        username: action.result.data.userName,
-        errorMessage: null
+        isAuthenticated: action.result.data.sessionToken ? true : false,
+        sessionToken: action.result.data.sessionToken,
+        loginId: action.result.data.loginId,
+        errorMessage: null,
+        errorMessage: null,
+        showPopup: true
       };
     case LOGIN_FAIL:
       return {
         ...state,
         isAuthenticated: false,
-        username: null,
-        errorMessage: action.error.data.messageKey
+        loginId: null,
+        sessionToken: null,
+        errorMessage: action.error.data.messageKey,
+        showPopup: true
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
-        username: null
+        loginId: null,
+        sessionToken: null,
+        showPopup: true
       };
     case GET_SESSION:
       return {
@@ -53,8 +64,9 @@ export default function reducer(state = initialState, action) {
     case GET_SESSION_SUCCESS:
       return {
         ...state,
-        isAuthenticated: action.result.data.authenticated || false,
-        username: action.result.data.userName,
+        isAuthenticated: action.result.data.sessionToken ? true : false,
+        loginId: action.result.data.loginId,
+        sessionToken: action.result.data.sessionToken,
         errorMessage: null,
         loading: false
       };
@@ -62,7 +74,8 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isAuthenticated: false,
-        username: null,
+        loginId: null,
+        sessionToken: null,
         debugError: action.error,
         loading: false
       };
@@ -71,6 +84,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         errorMessage: action.message
       };
+    case POPUP_CLOSE:
+      return {
+        ...state,
+        redirectURI: action.redirectURI,
+        showPopup: false
+      }
     default:
       return state;
   }
@@ -82,10 +101,10 @@ export function displayAuthError(message) {
   return {type: ERROR_MESSAGE, message};
 }
 
-export function login(username, password) {
+export function login(loginId, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/api/user/session', {username, password}),
+    promise: (client) => client.post('/api/user/session', {loginId, password}),
     afterSuccess: (dispatch, getState, response) => {
       localStorage.setItem('auth-token', response.headers['x-auth-token']);
       const routingState = getState().routing.locationBeforeTransitions.state || {};
@@ -99,7 +118,7 @@ export function logout() {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
     promise: (client) => client.delete('/api/user/session'),
     afterSuccess: () => {
-      browserHistory.push('login');
+      browserHistory.push('/');
     }
   };
 }
@@ -115,6 +134,6 @@ export function redirectToLoginWithMessage(messageKey) {
   return (dispatch, getState) => {
     const currentPath = getState().routing.locationBeforeTransitions.pathname;
     dispatch(displayAuthError(messageKey));
-    browserHistory.replace({pathname: '/login', state: {nextPathname: currentPath}});
+    browserHistory.replace({pathname: '/', state: {nextPathname: currentPath}});
   }
 }

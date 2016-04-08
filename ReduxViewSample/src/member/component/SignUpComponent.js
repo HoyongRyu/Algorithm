@@ -49,7 +49,7 @@ export default class SignUpComponent extends Component {
                   <button type="submit" className="btn btn-primary">Sign Up For BAS Admin</button>
                 </Form>
               </div>
-            </div>j
+            </div>
           </div>
         </div>
         <SuccessPopup message={this.props.message} show={this.state.isSuccesShow} close={this.props.closePopup} />

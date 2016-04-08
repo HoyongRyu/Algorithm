@@ -6,29 +6,29 @@ import logger from 'config/logger';
 
 const Header = (props) => {
   return (
-    <div className="navbar navbar-default navbar-static-top navbar-inverse">
-      <div className="container">
-        <div className="navbar-header">
-          <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-            <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-          </button>
-          <a className="navbar-brand" href="#"><span>BAS</span><br/></a>
-        </div>
-        <div className="collapse navbar-collapse" id="navbar-ex-collapse">
-          <ul className="nav navbar-nav navbar-right">
-            <li className="active">
-              <a href="#">Home</a>
+    <header className="main-header">
+      <a href="/" className="logo">
+        <span className="logo-lg"><b>Sample</b> Application</span>
+      </a>
+      <nav className="navbar navbar-static-top" role="navigation">
+        <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
+          <span className="sr-only">Toggle navigation</span>
+        </a>
+        <div className="navbar-custom-menu">
+          <ul className="nav navbar-nav">
+            <li className="dropdown user user-menu">
+              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                <img src={require("img/user2-160x160.jpg")} className="user-image" alt="User Image" />
+                <span className="hidden-xs">Alexander Pierce</span>
+              </a>
             </li>
             <li>
-              <a href="#">Contacts</a>
+              <a href="#" className="btn btn-primary btn-flat">Sign out</a>
             </li>
           </ul>
         </div>
-      </div>
-    </div>
+      </nav>
+    </header>
   );
 }
 
@@ -45,7 +45,9 @@ export class Index extends Component {
     return (
       <div id="application">
         <Header />
-        {this.props.children}
+        <div>
+          {this.props.children}
+        </div>
       </div>
     );
   }
