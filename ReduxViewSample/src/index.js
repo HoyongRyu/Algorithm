@@ -8,7 +8,7 @@ import { browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import { Router } from 'react-router';
-import getRoutes from 'config/router';
+import getRoutes from 'router/router';
 
 const devTools = process.env.NODE_ENV === 'development' ? <DevTools /> : null;
 

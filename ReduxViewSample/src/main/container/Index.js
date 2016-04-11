@@ -14,6 +14,14 @@ const Header = (props) => {
         <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
           <span className="sr-only">Toggle navigation</span>
         </a>
+        <div className="collapse navbar-collapse pull-left" id="navbar-collapse">
+          <ul className="nav navbar-nav">
+            <li className="active"><Link to="/admin">Member<span className="sr-only">(current)</span></Link></li>
+            <li><Link to="/admin">Product<span className="sr-only">(current)</span></Link></li>
+            <li><Link to="/admin">Display<span className="sr-only">(current)</span></Link></li>
+            <li><Link to="/admin">Order<span className="sr-only">(current)</span></Link></li>
+          </ul>
+        </div>
         <div className="navbar-custom-menu">
           <ul className="nav navbar-nav">
             <li className="dropdown user user-menu">
