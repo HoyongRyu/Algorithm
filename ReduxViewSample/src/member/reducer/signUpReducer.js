@@ -1,13 +1,14 @@
+import { browserHistory } from 'react-router';
+import { POPUP_CLOSE } from 'common/reducer/commonReducer';
+
 const SIGN_UP_REQUEST = 'signUp/REQUEST';
 const SIGN_UP_SUCCESS = 'signUp/SUCCESS';
 const SIGN_UP_FAIL = 'signUp/FAIL';
 
-const SIGN_UP_MODAL_CLOSE = 'signUp/MODAL_CLOSE'
-
 const initialState = {
-  sessionTokenId: '',
-  sessionFailCode: '',
-  modalShow: true
+  isSuccess: null,
+  message: '',
+  redirectURI: null
 };
 
 // Reducer
@@ -15,21 +16,24 @@ const initialState = {
 export default function signUpReducer(state = initialState, action) {
   switch (action.type) {
     case SIGN_UP_SUCCESS:
-      router.transitionTo('/');
       return {
         ...state,
-        sessionTokenId: action.result.data.usrId
+        isSuccess: true,
+        message: '관리자 승인 후 로그인 하세요.'
       };
     case SIGN_UP_FAIL:
       return {
-        ...state
-        // failCode: action.result.
+        ...state,
+        isSuccess: false,
+        message: '회원가입 실패. 관리자에게 문의하세요.'
       };
-    case SIGN_UP_MODAL_CLOSE:
+    case POPUP_CLOSE:
       return {
         ...state,
-        modalShow: false
-      };  
+        isSuccess: null,
+        message: '',
+        redirectURI: action.redirectURI
+      }
     default:
       return state;
   }
@@ -37,15 +41,9 @@ export default function signUpReducer(state = initialState, action) {
 
 // Actions
 
-export function signUp() {
+export const signUp = (loginId, password) => {
   return  {
     types: [SIGN_UP_REQUEST, SIGN_UP_SUCCESS, SIGN_UP_FAIL],
-    promise: client => client.post('/api/createUser')
+    promise: client => client.post('/api/user/createUser', {loginId, password})
   };
-}
-
-export function modalClose() {
-  return {
-    types: SIGN_UP_MODAL_CLOSE
-  }
 }

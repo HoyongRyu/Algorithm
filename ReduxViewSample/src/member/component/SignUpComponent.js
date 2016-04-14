@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router';
 import { Form, TextInput } from 'react-easy-form';
-import ErrorPopup from 'common/component/ErrorPopupComponent'
-import SuccessPopup from 'common/component/SuccessPopupComponent'
+import ErrorPopup from 'common/component/ErrorPopupComponent';
+import SuccessPopup from 'common/component/SuccessPopupComponent';
+import logger from 'config/logger';
 
 export default class SignUpComponent extends Component {
   constructor(props) {
@@ -61,6 +62,9 @@ export default class SignUpComponent extends Component {
   handleSubmit(formData) {
     const { loginId, password } = formData;
     const { signUp } = this.props;
+
+    logger("loginId : " + loginId + ", password : " + password);
+    
     signUp(loginId, password);
   }
 

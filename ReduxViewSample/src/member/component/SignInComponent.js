@@ -34,14 +34,14 @@ export default class SignInComponent extends Component {
             <Form ref="form" className="form-horizontal" onSubmit={(formData) => this.handleSubmit(formData)}>
               <div className="box-body">
                 <div className="form-group">
-                  <label htmlFor="loginId" className="col-sm-2 control-label">Email</label>
-                  <div className="col-sm-10">
+                  <label htmlFor="loginId" className="col-sm-4 control-label">Email</label>
+                  <div className="col-sm-8">
                     <TextInput type="email" className="form-control" name="loginId" placeholder="Enter email" required />
                   </div>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="password" className="col-sm-2 control-label">Password</label>
-                  <div className="col-sm-10">
+                  <label htmlFor="password" className="col-sm-4 control-label">Password</label>
+                  <div className="col-sm-8">
                     <TextInput type="password" className="form-control" name="password" placeholder="Password" required />
                   </div>
                 </div>
@@ -53,7 +53,7 @@ export default class SignInComponent extends Component {
             </Form>
           </div>
         </div>
-        <SuccessPopup message="로그인 성공" show={this.state.isSuccesShow} close={() => this.props.closePopup('/admin')} />
+        <SuccessPopup message="로그인 성공" show={this.state.isSuccesShow} close={this.props.closePopup} />
         <ErrorPopup message="로그인 실패" show={this.state.isErrorShow} close={this.props.closePopup} />
       </div>
     );

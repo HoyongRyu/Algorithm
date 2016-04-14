@@ -36,7 +36,6 @@ export default function reducer(state = initialState, action) {
         sessionToken: action.result.data.sessionToken,
         loginId: action.result.data.loginId,
         errorMessage: null,
-        errorMessage: null,
         showPopup: true
       };
     case LOGIN_FAIL:

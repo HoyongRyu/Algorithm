@@ -4,7 +4,7 @@ import { Modal, Alert } from 'react-bootstrap';
 export default class ErrorPopup extends Component {
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.close} className="modal modal-danger">
+      <Modal show={this.props.show} onHide={this.props.close} className="modal modal-warning">
   	    <Modal.Header className="modal-header" closeButton>
   	      <Modal.Title>
   	        <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;
